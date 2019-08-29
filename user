@@ -1,3 +1,4 @@
+
 import java.util.*; 
 //import java.util.ArrayList;
 //import java.util.Scanner;
@@ -67,9 +68,19 @@ public class User{
            }
        }
    }
+   public String getFriendrequests()
+   {
+	   return Arrays.toString(frequests.toArray());
+   }
+   public String getFriend()
+   {
+	   return Arrays.toString(friends.toArray());
+   }
+   
+  
   public String toString()
-  {
-      return "Username:"+username+"Email:"+email+"All friend requests:"+frequests+"All friends:"+friends+"Everything on your wall:"+wall.postlist;
+  { 
+      return "Username:"+username+"Email:"+email+"All friend requests:"+getFriendrequests()+"All friends:"+getFriend()+"Posts on your wall:"+wall.getpostlist()+" Replies on your wall"+wall.getreplies();
   }
   public void printfr(User user)
   {
