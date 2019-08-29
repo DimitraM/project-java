@@ -16,9 +16,23 @@ public class Menu extends Network {
 	}
     return usernull;
 	}
-    public void seeyourwall() {
+    public void seeyourwall() 
+    {
     	User myuser=start();
-    	myuser.wall.postlist.toString();
+    	System.out.println("Posts: "+ myuser.wall.getpostlist()+"Replies :"+myuser.wall.getreplies());
     }
+    public void seeFriendsWall(User user1)
+    {
 
+    System.out.println("Choose to see a friends wall");
+    
+    System.out.println(user1.getFriend());
+   
+    System.out.println("Press the number of the friend you want to see his wall");
+    Scanner sc = new Scanner(System.in);
+    int j = sc.nextInt();
+    
+    System.out.println("Posts: "+ user1.wall.getpostlist()+"Replies :"+user1.wall.getreplies());
+    }
 }
+
