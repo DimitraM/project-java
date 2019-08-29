@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 public class Wall {
     ArrayList<Message> postlist= new ArrayList<Message>();
+    ArrayList<ReplyMessage> postlistreply= new ArrayList<ReplyMessage>();
     
     public int share(User user1,User user2)//elegxos gia to an einai filoi
     {
@@ -15,6 +17,15 @@ public class Wall {
        
        //return 3;
     }
-   public String toString()
-   {return "List of posts"+ postlist;}
-}
+    
+    
+    public String getpostlist()
+    {
+	   return Arrays.toString(postlist.toArray());
+    }
+    public String getreplies()
+    {
+	   return Arrays.toString(postlistreply.toArray());
+    }
+    
+   }
