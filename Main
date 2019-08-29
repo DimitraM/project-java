@@ -18,9 +18,9 @@ public class Main
     	net.adduser(user1);
     	net.adduser(user2);
     	net.adduser(user3);
-    	net.makefriends(user1, user2);
-    	net.makefriends(user2, user3);
-    	System.out.println(user1.toString());
+    	//net.makefriends(user1, user2);
+    	//net.makefriends(user2, user3);
+    	/*System.out.println(user1.toString());
     	for(int i=0; i<user1.wall.postlist.size();i++)
     	{
     		System.out.println(user1.wall.postlist.get(i));
@@ -28,9 +28,10 @@ public class Main
     	for(int i=0; i<user1.friends.size();i++)
     	{
     		System.out.println(user1.friends.get(i));
-    	}
+    	}*/
     	
-    	//test.seeyourwall();
+    	//test.seeFriendsWall(user1);
+    	System.out.println(user1.toString());
     }
     
 }
