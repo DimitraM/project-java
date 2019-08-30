@@ -11,27 +11,32 @@ public class Main
     	Message message1=new Message("Hi!");
     	Message message2=new Message("Hi2!");
     	Message message3=new Message("Hi3!");
+    	
+    	ReplyMessage reply1=new ReplyMessage("Hi!");
+    	ReplyMessage reply2=new ReplyMessage("Hi2!");
+    	ReplyMessage reply3=new ReplyMessage("Hi3!");
+    	
     	user1.wall.postlist.add(message1);
+    	user1.wall.postlistreply.add(reply1);
     	user2.wall.postlist.add(message2);
+    	user2.wall.postlistreply.add(reply2);
     	user3.wall.postlist.add(message3);
+    	user3.wall.postlistreply.add(reply3);
+    	
     	Network net=new Network();
     	net.adduser(user1);
     	net.adduser(user2);
     	net.adduser(user3);
-    	//net.makefriends(user1, user2);
-    	//net.makefriends(user2, user3);
-    	/*System.out.println(user1.toString());
-    	for(int i=0; i<user1.wall.postlist.size();i++)
-    	{
-    		System.out.println(user1.wall.postlist.get(i));
-    	}
-    	for(int i=0; i<user1.friends.size();i++)
-    	{
-    		System.out.println(user1.friends.get(i));
-    	}*/
+    	net.makefriends(user1, user2);
+    	net.makefriends(user2, user3);
+    	//test.seeyourwall();
+    	//test.seeFriendsWall();
+    	//System.out.println(user1.toString()+"\n");
+    	//System.out.println(user2.toString());
+    	//System.out.println(user1.wall.getpostlist(););
+    	System.out.println(user1.wall.getpostlist()+ user1.wall.getreplies());
+    	user1.printfr();
     	
-    	//test.seeFriendsWall(user1);
-    	System.out.println(user1.toString());
     }
     
 }
