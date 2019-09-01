@@ -1,32 +1,37 @@
 import java.util.*;
 public class Network {
     Map<ArrayList,User> network=new HashMap<ArrayList,User>();
-    //ArrayList<FriendRequest> list=new ArrayList<FriendRequest>();
+    public ArrayList<User> users=new ArrayList<User>();
     public void adduser(User user)
     {
-        network.put(user.frequests, user);
+        network.put(user.friends, user);
+        users.add(user);
     }
     public void remove(User user)
     {
         network.remove(user);
+        users.remove(user);
     }
     public void makefriends(User user1,User user2)
-    {int x;
-        if(user1!=user2)
+    {
+        /*if(user1!=user2)
         {
            
                if( user1.friends.contains(user2))
-               {System.out.println("User 1 and use 2 are  friends"); x=1;}
-               else{System.out.println("Users are not friends");//x=0;
-               user1.friends.add(user2);
-               user2.friends.add(user1);}
+               {System.out.println("User 1 and user 2 are  friends");}
+               else{System.out.println("Users are not friends");
+                   user1.friends.add(user2);
+                   user2.friends.add(user1);}
         }
-        else{System.out.println("User 1 and User 2 are the same user");x=2;}
-       /* if(x==0)
+        else{System.out.println("User 1 and User 2 are the same user");}*/
+        if (user1==user2)
+        {System.out.println("Same user");}
+        else if(user1.friends.contains(user2))
+        {System.out.println("Users are already friends");}
+        else
         {user1.friends.add(user2);
          user2.friends.add(user1);
-        }*/
-        
+        System.out.println("Success");}
     }
     public void printfriends(User user)
     {
@@ -46,7 +51,8 @@ public class Network {
         
     }
     public ArrayList mfriends(User user1,User user2)
-    {ArrayList<User> mutuals=new ArrayList<User>();
+    {
+    	ArrayList<User> mutuals=new ArrayList<User>();
         for(int i=0; i<user1.friends.size(); i++)
         {
             for(int j=0; j<user2.friends.size(); j++)
@@ -59,5 +65,36 @@ public class Network {
         }
         return mutuals;
     }
+    public  void help()
+    {
+    	User user1=new User("user1","email1");
+    	User user2=new User("user2","email2");
+    	User user3=new User("user3","email3");
+    	
+    	Message message1=new Message("Hi!");
+    	Message message2=new Message("Hi2!");
+    	Message message3=new Message("Hi3!");
+    	
+    	ReplyMessage reply1= new ReplyMessage("HI");
+    	ReplyMessage reply2= new ReplyMessage("HI2");
+    	ReplyMessage reply3= new ReplyMessage("HI3");
+    	
+    	user1.wall.postlist.add(message1);
+    	user2.wall.postlist.add(message2);
+    	user3.wall.postlist.add(message3);
+    	
+    	user1.wall.replies.add(reply1);
+    	user2.wall.replies.add(reply2);
+    	user3.wall.replies.add(reply3);
+    	adduser(user1);
+    	adduser(user2);
+    	adduser(user3);
+    	makefriends(user1, user2);
+    	makefriends(user2, user3);
+    	
+    	
+    }
+    
     
 }
+
