@@ -1,38 +1,268 @@
 import java.util.*;
+
 public class Menu extends Network {
+   
+	User guser=new User();
+	
+	
+  public   User startmenu(){ 
+	//Network net=new Network();
+	help();
+	
+	
     
-	public User start(){ 
-	User usernull=null;
     System.out.println("Welcome! Please enter your username:");
     Scanner sc = new Scanner(System.in);
     String i = sc.nextLine();
-    //Set<User> mySet = network.get("i");
-    for(int j=0; j<network.size();j++) {
-    if (network.containsValue(i))
-    {
-    	return network.get(j);
-    }
-    
-	}
-    return usernull;
-	}
-    public void seeyourwall() 
-    {
-    	User myuser=start();
-    	System.out.println("Posts: "+ myuser.wall.getpostlist()+"Replies :"+myuser.wall.getreplies());
-    }
-    public void seeFriendsWall(User user1)
-    {
-
-    System.out.println("Choose to see a friends wall");
-    
-    System.out.println(user1.getFriend());
+    //User usernull=null;
    
-    System.out.println("Press the number of the friend you want to see his wall");
-    Scanner sc = new Scanner(System.in);
-    int j = sc.nextInt();
+    for(int j=0; j<users.size();j++) {
     
-    System.out.println("Posts: "+ user1.wall.getpostlist()+"Replies :"+user1.wall.getreplies());
+    if (users.get(j).getUsername().equalsIgnoreCase(i))
+    {	
+    	System.out.println("Authentication complete!!");
+    	
+        guser = users.get(j);
+        
     }
+    
+    }
+    return guser;
+    }
+    /*public User start()
+    {
+        System.out.println("Welcome! Please enter your username:");
+    Scanner sc = new Scanner(System.in);
+    String i = sc.nextLine();
+    return network.get(i);
+}*/
+    User myuser=startmenu();
+    public  void continueToMenu()
+    {	
+    
+    
+    
+    
+        System.out.println("If you want to see your wall, press 1");
+        System.out.println("If you want to see a friend's wall press 2");
+        System.out.println("If you want to send friend request, press 3");
+        System.out.println("If you want to reply to a friend request, press 4");
+        System.out.println("If you want to see your friends, press 5");
+        System.out.println("If you want to logout and login again with another username, press 6");
+        System.out.println("If u want to exit the program press 7");
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        switch(k)
+        {
+          case 1:
+            System.out.println("YOUR WALL:");
+            System.out.println("Posts: "+ myuser.wall.getpostlist()+"Replies :"+myuser.wall.getreplies());
+            break;
+          case 2:
+            System.out.println("Your friends list: "+ myuser.getFriend());
+            System.out.println("Which friend's wall you want to see?");
+            Scanner scc = new Scanner(System.in);
+            String u = scc.nextLine();
+            for(int j=0; j<myuser.friends.size();j++) 
+            {
+               if (myuser.friends.get(j).username.equals(u))
+                {
+                    myuser=myuser.friends.get(j);
+                    System.out.println("YOUR FRIEND'S WALL:");
+                    System.out.println("Posts: "+ myuser.wall.getpostlist()+"Replies :"+myuser.wall.getreplies());
+                }
+            }
+            System.out.println("If you want to post a message, press a");
+            System.out.println("If you want to reply to a message, press b");
+         	 System.out.println("If you want to like a message, press c");
+           
+         	 Scanner sca = new Scanner(System.in);
+         	 String l = sca.nextLine();
+           switch(l)
+           {
+               case "a":
+               System.out.println("Please enter a text ");
+               Scanner scaa = new Scanner(System.in);
+               String t = scaa.nextLine();
+               Message text=new Message(t);
+               myuser.wall.postlist.add(text);
+               System.out.println("OKAY  "+myuser.wall.getpostlist());
+               backToMenu();
+               
+               break;
+               
+               case "b":
+               System.out.println("FRIEND'S WALL:"+myuser.wall.getpostlist());
+               System.out.println("Enter the number of the message to reply");
+               Scanner in = new Scanner(System.in);
+               int n = in.nextInt();
+               
+               System.out.println("You chose the following message: " +myuser.wall.postlist.get(n-1).text);
+               System.out.println("Enter a reply");
+               Scanner sccc=new Scanner(System.in);
+               String te=sccc.nextLine();
+               ReplyMessage reply=new ReplyMessage(te);
+               myuser.wall.replies.add(reply);
+               System.out.println("Replies of  "+ myuser + myuser.wall.getreplies());
+               myuser = guser;
+               backToMenu();
+               break;
+               
+               
+               case "c":
+               System.out.println("All messages:" +myuser.wall.getpostlist());
+               System.out.println("Enter the number of the message to like");
+               Scanner inn = new Scanner(System.in);
+               int ni = inn.nextInt();
+               System.out.println("You chose the following message: " +myuser.wall.postlist.get(ni-1).text);
+               myuser.wall.postlist.get(ni-1).setLikes(1);
+               System.out.println(myuser.wall.postlist.get(ni-1).toString());
+               backToMenu();
+               break;
+        }
+        break;
+        case 3:
+       
+        	/*for(int j=0; j<users.size();j++) {
+        	    
+        	   
+        	    	System.out.println("Users at first"+users.get(j).toString());
+        	  
+        	    }
+        /*for(int i=0; i<users.size(); i++)
+        {
+            if(myuser.friends.get(0).equals(users.get(i)))
+           {
+            	System.out.println("Current friends  :"+myuser.friends.get(i).toString()+" , ");
+           }
+            else
+            {
+            System.out.println("CHOOSE A USER TO SEND FRIEND REQUEST: ");
+            System.out.println((i+1) + " " + users.get(i).toString());
+             
+            }
+        }*/
+        	users.removeAll(myuser.friends);
+        	users.remove(myuser);
+        	System.out.println("CHOOSE A USER TO SEND FRIEND REQUEST: ");
+        	for(int j=0; j<users.size();j++)
+        		{
+        			System.out.println((j+1)+" "+users.get(j).toString());
+        		}
+        	
+        	
+        	Scanner in = new Scanner(System.in);
+        	String ans = in.nextLine();
+        	
+    
+        	User usernull2=null;
+        	for(int j=0; j<users.size();j++) {
+        	    
+        	    if (users.get(j).getUsername().equalsIgnoreCase(ans))
+        	    {	
+        	    	System.out.println("Sent!!");
+        	    	
+        	        usernull2 = users.get(j);
+        	        myuser.sendfr(myuser, usernull2);
+        	        
+        	    }
+        	  }
+        	System.out.print(myuser.frequests+"\n");
+        	   
+        		for(int j=0; j<myuser.friends.size();j++)
+        		{
+        			users.add(myuser.friends.get(j));
+        		}
+        			users.add(myuser);
+        			
+        			myuser = guser;
+        			
+        			backToMenu();
+        			
+        			break;
+
+        case 4:
+        	  	
+                	for(int j=0;j<myuser.frequests.size();j++) {
+                		if(myuser.frequests.get(j).from != myuser) {
+                		System.out.println((j+1)+"  "+ myuser.frequests.get(j).to);
+                		}
+                		else {
+                			
+                			System.out.println("No");
+                		}
+                	}
+                
+                	
+                	backToMenu();
+                	
+                	
+                	break;
+                	
+        case 5:
+        	System.out.println(myuser.friends);
+        	backToMenu();
+        	break;
+        case 6:
+        	System.out.println("Successfull logout!");
+        	startmenu();
+        	continueToMenu();
+        	break;
+        	
+        case 7 : 
+        	System.out.println("Cya Later");
+        	return;
+        	
+                		/*for(int i=0; i<users.size();i++)
+                		{
+                			if(users.get(i).frequests.get(i).to.equals(myuser))
+                			{
+                				System.out.println((i+1)+"  "+users.get(i).frequests.get(i).from);
+                			}
+                		}
+                		
+                	}
+                		for(int i=0; i<myuser.frequests.size();i++)
+                		{
+                			if(users.get(i).frequests.get(i).to.equals(myuser))
+                			{
+                				System.out.println((i+1)+"  "+users.get(i).frequests.get(i).from);
+                			}
+                		}
+                		
+                	}
+        			/*
+        	
+       case 4:
+        	for(int j=0; j<users.size();j++) 
+        	{
+    	    	System.out.println("Users at first"+myuser.frequests);
+    	  
+    	    }
+        	break;
+    }*/
+    
+        
+    
+  
+        }
+    }
+
+ public void  backToMenu()
+   {
+	 System.out.println("Do u want to return to menu");
+	 Scanner in = new Scanner(System.in);
+	 String i = in.nextLine();
+	 if(i=="yes") {
+	   continueToMenu();
+	 }
+	 else
+	 {
+		 return; 
+	 }
+	 
+	  
+   }
+ 
 }
 
