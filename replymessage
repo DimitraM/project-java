@@ -8,6 +8,6 @@ public class ReplyMessage extends Message{
     }
     public String toString()
     {
-        return " Replies "+textreply;
+        return " "+ super.toString()+ " Replies "+textreply;
     }
 }
