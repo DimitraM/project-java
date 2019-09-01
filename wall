@@ -1,8 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Wall {
-    ArrayList<Message> postlist= new ArrayList<Message>();
-    ArrayList<ReplyMessage> postlistreply= new ArrayList<ReplyMessage>();
+    public  ArrayList<Message> postlist= new ArrayList<Message>();
+    //ArrayList<ReplyMessage> postlistreply= new ArrayList<ReplyMessage>();
+    public  ArrayList<ReplyMessage> replies=new ArrayList<ReplyMessage>();
+    public String getreplies()
+    {
+       String str=" ";
+	   for(int i=0; i<replies.size(); i++)
+	  {
+	   str+=(i+1)+": "+replies.get(i).text;
+	   
+          }
+	  return str; 
+    }
     
     public int share(User user1,User user2)//elegxos gia to an einai filoi
     {
@@ -19,13 +31,24 @@ public class Wall {
     }
     
     
+   
     public String getpostlist()
     {
-	   return Arrays.toString(postlist.toArray());
+	   String str=" ";
+	   for(int i=0; i<postlist.size(); i++) {
+	   str+=(i+1)+": "+ postlist.get(i).toString();}
+	  return str;
+        //return Arrays.toString(postlist.toArray());
+        
     }
-    public String getreplies()
+    
+    /*public String getreplies()
     {
-	   return Arrays.toString(postlistreply.toArray());
-    }
+            String str=null;
+	   for(int i=0; i<replies.size(); i++) {
+	   str+=replies.get(i).textreply;}
+	  return str;
+	   //return Arrays.toString(postlistreply.toArray());
+    }*/
     
    }
