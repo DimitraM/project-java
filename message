@@ -13,5 +13,6 @@ public class Message {
     {
         return " Message "+text+" Likes "+likes+replies.toString();
     }
-            
+    public int getlikes() {return likes;}
+    public void setLikes(int Likes ) {Likes=this.likes;}
 }
