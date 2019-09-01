@@ -39,10 +39,10 @@ public class Menu extends Network {
     User myuser=startmenu();
     public  void continueToMenu()
     {	
+  
     
     
-    
-    
+   
         System.out.println("If you want to see your wall, press 1");
         System.out.println("If you want to see a friend's wall press 2");
         System.out.println("If you want to send friend request, press 3");
@@ -50,13 +50,18 @@ public class Menu extends Network {
         System.out.println("If you want to see your friends, press 5");
         System.out.println("If you want to logout and login again with another username, press 6");
         System.out.println("If u want to exit the program press 7");
+        //try {
         Scanner sc = new Scanner(System.in);
-        int k = sc.nextInt();
+        int k = sc.nextInt(); //}
+   // catch(MenuProblem e) {
+    //System.out.println(e.getMessage());}
         switch(k)
         {
           case 1:
             System.out.println("YOUR WALL:");
             System.out.println("Posts: "+ myuser.wall.getpostlist()+"Replies :"+myuser.wall.getreplies());
+            myuser=guser;
+            backToMenu();
             break;
           case 2:
             System.out.println("Your friends list: "+ myuser.getFriend());
@@ -87,6 +92,7 @@ public class Menu extends Network {
                Message text=new Message(t);
                myuser.wall.postlist.add(text);
                System.out.println("OKAY  "+myuser.wall.getpostlist());
+               myuser=guser;
                backToMenu();
                
                break;
@@ -117,31 +123,13 @@ public class Menu extends Network {
                System.out.println("You chose the following message: " +myuser.wall.postlist.get(ni-1).text);
                myuser.wall.postlist.get(ni-1).setLikes(1);
                System.out.println(myuser.wall.postlist.get(ni-1).toString());
+               myuser=guser;
                backToMenu();
                break;
         }
         break;
         case 3:
-       
-        	/*for(int j=0; j<users.size();j++) {
-        	    
-        	   
-        	    	System.out.println("Users at first"+users.get(j).toString());
-        	  
-        	    }
-        /*for(int i=0; i<users.size(); i++)
-        {
-            if(myuser.friends.get(0).equals(users.get(i)))
-           {
-            	System.out.println("Current friends  :"+myuser.friends.get(i).toString()+" , ");
-           }
-            else
-            {
-            System.out.println("CHOOSE A USER TO SEND FRIEND REQUEST: ");
-            System.out.println((i+1) + " " + users.get(i).toString());
-             
-            }
-        }*/
+    
         	users.removeAll(myuser.friends);
         	users.remove(myuser);
         	System.out.println("CHOOSE A USER TO SEND FRIEND REQUEST: ");
@@ -185,15 +173,30 @@ public class Menu extends Network {
         	  	
                 	for(int j=0;j<myuser.frequests.size();j++) {
                 		if(myuser.frequests.get(j).from != myuser) {
-                		System.out.println((j+1)+"  "+ myuser.frequests.get(j).to);
+                		System.out.println((j+1)+"  "+ myuser.frequests.get(j).from);
                 		}
                 		else {
                 			
                 			System.out.println("No");
                 		}
                 	}
-                
+                	in = new Scanner(System.in);
+                	ans = in.nextLine();
+                	User usernull3=null;
+                	for(int j=0;j<myuser.frequests.size();j++) 
+                	{	
+                		System.out.println("mesa");
+                		if(myuser.frequests.get(j).from.getUsername().equalsIgnoreCase(ans)) {
+                			
+                			System.out.println("mesa se if");
                 	
+                		usernull3 = myuser.frequests.get(j).from;
+                		myuser.acceptdeny(myuser,usernull3);
+                		}
+                	}
+                	
+                
+                	myuser = guser;
                 	backToMenu();
                 	
                 	
@@ -202,47 +205,21 @@ public class Menu extends Network {
         case 5:
         	System.out.println(myuser.friends);
         	backToMenu();
+        	myuser=guser;
         	break;
         case 6:
         	System.out.println("Successfull logout!");
+        	myuser = guser;
         	startmenu();
         	continueToMenu();
+        	
         	break;
         	
         case 7 : 
         	System.out.println("Cya Later");
         	return;
         	
-                		/*for(int i=0; i<users.size();i++)
-                		{
-                			if(users.get(i).frequests.get(i).to.equals(myuser))
-                			{
-                				System.out.println((i+1)+"  "+users.get(i).frequests.get(i).from);
-                			}
-                		}
                 		
-                	}
-                		for(int i=0; i<myuser.frequests.size();i++)
-                		{
-                			if(users.get(i).frequests.get(i).to.equals(myuser))
-                			{
-                				System.out.println((i+1)+"  "+users.get(i).frequests.get(i).from);
-                			}
-                		}
-                		
-                	}
-        			/*
-        	
-       case 4:
-        	for(int j=0; j<users.size();j++) 
-        	{
-    	    	System.out.println("Users at first"+myuser.frequests);
-    	  
-    	    }
-        	break;
-    }*/
-    
-        
     
   
         }
@@ -250,16 +227,22 @@ public class Menu extends Network {
 
  public void  backToMenu()
    {
+	
 	 System.out.println("Do u want to return to menu");
 	 Scanner in = new Scanner(System.in);
 	 String i = in.nextLine();
-	 if(i=="yes") {
-	   continueToMenu();
-	 }
-	 else
+	 switch(i)
 	 {
-		 return; 
+	 case "yes":
+		 continueToMenu();
+		 break;
+		 
+	 case "no":
+		 break;
+	 
 	 }
+	 
+	 
 	 
 	  
    }
