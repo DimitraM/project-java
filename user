@@ -1,18 +1,36 @@
 
+
 import java.util.*; 
 //import java.util.ArrayList;
 //import java.util.Scanner;
 public class User{
+    //protected String username;
+    //protected String email;
     protected String username;
-    protected String email;
-    ArrayList<FriendRequest> frequests=new ArrayList<FriendRequest>();
-    ArrayList<User> friends=new ArrayList<User>();
+    private String email;
+    public  ArrayList<FriendRequest> frequests=new ArrayList<FriendRequest>();
+    public  ArrayList<User> friends=new ArrayList<User>();
     protected Wall wall=new Wall();
+    
+    public User() {}
     public User(String username,String email)
     {
         this.username=username;
         this.email=email;
     }
+    public String getUsername()
+    {
+        return username;
+    }
+    public void setUsername(String newUsername)
+    {
+        this.username=newUsername;
+    }
+    public String getEmail()
+    {return email;}
+    public void setEmail(String newEmail)
+    {this.email=newEmail;}
+   
     public void sendfr(User user1,User user2)
     {
         FriendRequest fr=new FriendRequest(user1,user2,"pending");
@@ -68,19 +86,38 @@ public class User{
            }
        }
    }
+   /*public String getFriendrequests()
+   {
+	   return Arrays.toString(frequests.toArray());
+   }
+   public String getFriend()
+   {
+	   return Arrays.toString(friends.toArray());
+   }
+   
+  
+  public String toString()
+  { 
+      return "Username:"+this.getUsername()+"Email:"+this.getEmail();//+"All friend requests:"+getFriendrequests()+"All friends:"+getFriend()+"Posts on your wall:"+wall.getpostlist()+" Replies on your wall"+wall.getreplies();
+  }
+  public void printfr(User user)
+  {
+      Network net=new Network();
+      net.printfriends(user);
+  }*/
   public String getFriendrequests()
    {	
-	   String str=null;
+	   String str=" ";
 	   for(int i=0; i<friends.size(); i++) {
-	   str=friends.get(i).username;}
+	   str+=friends.get(i).username;}
 	  return str;
 		  
    }
    public String getFriend()
    {
-	   String str=null;
+	   String str=" ";
 	   for(int i=0; i<friends.size(); i++) {
-	   str=friends.get(i).username;}
+	   str+=friends.get(i).username;}
 	  return str;
    }
    
