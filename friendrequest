@@ -4,6 +4,7 @@ public class FriendRequest {
     protected User to;
     protected String state;
     Timestamp timestampfr=new Timestamp(System.currentTimeMillis());
+    
     public FriendRequest(User from,User to,String state)
     {   //super(username,email);
         this.from=from;
@@ -13,6 +14,7 @@ public class FriendRequest {
     }
     public String toString()
     {
-    	return "Friend Request from:"+ from+"to :"+to+ "State"+ state;
+        return "Friend requests from: " + from+ "to: "+to+"state: "+state;
     }
+    
 }
